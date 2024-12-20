@@ -1,0 +1,22 @@
+---
+- hosts: ubuntu
+  tasks:
+  - name: check if the url is responding
+    uri:
+      url: http://localhost:81
+      method: GET
+    register: web_responce
+    retries: 5
+    delay: 10
+    until: web_responce.status == 200
+    ignore_errors: true
+
+  - name: run when file exist
+    debug:
+      msg: "The site is up and running"
+    when: web_responce.status == 200
+
+  - name: run when file does not exist
+    debug:
+      msg: "The site is down"
+    when: web_responce.status != 200

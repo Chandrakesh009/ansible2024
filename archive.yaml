@@ -1,0 +1,12 @@
+---
+- hosts: ubuntu
+  tasks:
+  - name: archive a directroy
+    archive:
+      path: /tmp/sample-1
+      dest: /tmp/archived.tar.gz
+  - name: Fetch the archived file
+    fetch:
+      src: /tmp/archived.tar.gz
+      dest: /tmp/backup/
+      flat: yes

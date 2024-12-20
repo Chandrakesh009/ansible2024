@@ -1,0 +1,21 @@
+---
+- hosts: linux
+  serial: 1
+  tasks:
+  - name: task1
+    shell:
+      cmd: "sleep 10 && uptime"
+    register: result1
+
+  - name: task1output
+    debug:
+      msg: "Task 1 output is {{ result1.stdout }}"
+
+  - name: task2
+    shell:
+      cmd: "sleep 5 && w"
+    register: result2
+
+  - name: task2output
+    debug:
+      msg:  "Task 2 output is {{ result2.stdout }}"

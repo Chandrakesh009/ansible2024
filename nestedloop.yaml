@@ -1,0 +1,10 @@
+---
+- hosts: ubuntu
+  tasks:
+  - name: print nested loop variable
+    debug:
+      msg: "{{ item[0] }} CM tool is {{ item[2] }} and {{ item[1] }} to use"
+    with_nested:
+    - [ 'chef', 'puppet', 'ansible']
+    - [ 'hard', 'medium', 'easy']
+    - [ 'costly' , 'cheap', 'cheapiest']

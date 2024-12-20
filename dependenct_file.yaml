@@ -1,0 +1,21 @@
+---
+- hosts: ubuntu
+  tasks:
+  - name: check if the file exists
+    stat:
+      path: /tmp/config.txt
+    register: file_status
+    retries: 5
+    delay: 10
+    until: file_status.stat.exists == true
+    ignore_errors: true
+
+  - name: run when file exist
+    debug:
+      msg: "File exists"
+    when: file_status.stat.exists == true
+
+  - name: run when file does not exist
+    debug:
+      msg: "File does not existsi even after waiting for 50 sec"
+    when: file_status.stat.exists == false

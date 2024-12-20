@@ -1,0 +1,21 @@
+---
+- hosts: ubuntu
+  become: yes
+  tasks:
+  - name: Install NTP Service
+    apt:
+      name: ntp
+      state: latest
+      update_cache: yes
+  - name: Start NTP Service
+    service:
+      name: ntp
+      state: started
+  - name: Configure NTP Service
+    block:
+      - name: Create NTP configuration file
+        template:
+          src: /etc/ansible/playbooks/ntp.conf.j2
+          dest: /etc/ntp.conf
+
+                            

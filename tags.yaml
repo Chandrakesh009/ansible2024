@@ -1,0 +1,40 @@
+---
+- hosts: ubuntu
+  become: yes
+  tasks:
+  - name: Install Db server
+    apt:
+      name: mariadb-server
+      state: latest
+      update_cache: true
+    tags:
+    - install
+    - full
+    - setup
+  - name: start mariadb service
+    service:
+      name: mariadb
+      state: started
+    tags:
+    - start
+    - full
+    - setup
+  - name: restart mariadb service
+    service:
+      name: mariadb
+      state: restarted
+    tags:
+    - restart
+  - name: stop mariadb service
+    service:
+      name: mariadb
+      state: stopped
+    tags:
+    - stop
+  - name: Create mariadb user
+    user:
+      name: mariadbuser
+      state: present
+    tags:
+    - user
+    - full

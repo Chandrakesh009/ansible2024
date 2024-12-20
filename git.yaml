@@ -1,0 +1,24 @@
+---
+- hosts: ubuntu
+  become: yes
+  tasks:
+  - name: install git
+    apt:
+      name: git
+      state: latest
+      update_cache: true
+  - name: clone a repo
+    git:
+      repo: https://github.com/sathishbob/javaapp-kuber.git
+      dest: /tmp/javaapp
+      version: master
+  - name: install maven
+    apt:
+      name: maven
+      state: latest
+      update_cache: true
+  - name: Perform maven build
+    command: mvn clean install
+    args:
+      chdir: /tmp/javaapp/kubernetes-java/
+

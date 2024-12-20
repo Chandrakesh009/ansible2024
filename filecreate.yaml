@@ -1,0 +1,11 @@
+---
+- hosts: linux
+  tasks:
+  - name: Create file
+    ansible.builtin.file:
+      path: /home/ansible/training
+      state: touch
+  - name: Create Directory
+    ansible.builtin.file:
+      path: /home/ansible/testdir
+      state: directory

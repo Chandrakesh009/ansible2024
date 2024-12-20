@@ -1,0 +1,21 @@
+---
+- name: start apache service on ubuntu
+  service:
+    name: apache2
+    state: started
+    enabled: true
+  become: yes
+  when: ansible_os_family == "Debian"
+- name: start apache service on centos
+  service:
+    name: httpd
+    state: started
+    enabled: true
+  become: yes
+  when: ansible_os_family == "RedHat"
+- name: Start IIS on windows
+  win_service:
+    name: W3SVC
+    state: started
+    start_mode: auto
+  when: ansible_os_family == "Windows"

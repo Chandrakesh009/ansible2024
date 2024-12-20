@@ -1,0 +1,16 @@
+---
+# handlers file for /etc/ansible/roles//webserver
+- name: restart apache2
+  service:
+    name: apache2
+    state: restarted
+  become: yes
+- name: restart httpd
+  service:
+    name: httpd
+    state: restarted
+  become: yes
+- name: restart iis
+  win_service:
+    name: W3SVC
+    state: restarted

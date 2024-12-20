@@ -1,0 +1,7 @@
+---
+- hosts: ubuntu
+  tasks:
+  - name: unarchive a file
+    unarchive:
+      src: /etc/ansible/playbooks/sample-1.tar
+      dest: /tmp

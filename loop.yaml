@@ -1,0 +1,18 @@
+---
+- hosts: ubuntu
+  become: yes
+  tasks:
+  - name: create users
+    user:
+      name: "testuser{{ item }}"
+      state: present
+    loop: "{{ range(1,5) }}"
+  - name: copy trmplate files
+    template:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+    loop:
+    - src: /etc/ansible/playbooks/test1.txt.j2
+      dest: /home/ansible/test1.txt
+    - src: /etc/ansible/playbooks/test2.txt.j2
+      dest: /home/ansible/test2.txt

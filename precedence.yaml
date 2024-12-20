@@ -1,0 +1,15 @@
+---
+- hosts: ubuntu
+  vars_files:
+  - vars/env.yaml
+  vars:
+    value: playbook
+  tasks:
+  - name: set a fact value
+    set_fact:
+      value: setfact
+  - name: print the value variable
+    vars:
+      value: task
+    debug:
+      msg: "Value for the variable is {{ value }}"

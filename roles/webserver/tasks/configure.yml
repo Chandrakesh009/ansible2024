@@ -1,0 +1,21 @@
+---
+- name: Copy Index.html file to ubuntu node
+  template:
+    src: templates/index.html.j2
+    dest: /var/www/html/index.html
+  become: yes
+  notify: restart apache2
+  when: ansible_os_family == "Debian"
+- name: Copy Index.html file to centos node
+  template:
+    src: templates/index.html.j2
+    dest: /var/www/html/index.html
+  become: yes
+  notify: restart httpd
+  when: ansible_os_family == "RedHat"
+- name: Copy Index.html to windows node
+  template:
+    src: templates/index.html.j2
+    dest: C:\inetpub\wwwroot\index.html
+  notify: restart iis
+  when: ansible_os_family == "Windows"

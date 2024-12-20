@@ -1,0 +1,18 @@
+---
+- name: Configure web server
+  hosts: web
+  become: true
+  tasks:
+  - name: Install vim package
+    ansible.builtin.apt:
+      name: vim
+      state: present
+      update_cache: yes
+- name: Configure database
+  hosts: db
+  become: true
+  tasks:
+  - name: Install vim package
+    ansible.builtin.yum:
+      name: vim
+      state: present

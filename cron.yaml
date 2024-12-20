@@ -1,0 +1,10 @@
+
+---
+- hosts: ubuntu
+  tasks:
+  - name: create a cronjob
+    cron:
+      name: "Backup Job"
+      minute: "0"
+      hour: "9"
+      job: "/usr/bin/backup.sh"

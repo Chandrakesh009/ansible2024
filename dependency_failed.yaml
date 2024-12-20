@@ -1,0 +1,20 @@
+---
+- hosts: ubuntu
+  become: true
+  tasks:
+    - name: Check if a apache2 is installed
+      command: which apache2
+      register: apache_check
+      ignore_errors: yes
+
+    - name: Install apache2
+      apt:
+        name: apache2
+        state: latest
+      when: apache_check.failed == true
+
+    - name: start apache2
+      service:
+        name: apache2
+        state: started
+      when: apache_check.failed == false

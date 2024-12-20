@@ -1,0 +1,17 @@
+---
+- hosts: ubuntu
+  tasks:
+  - name: check if the file exists
+    stat:
+      path: /tmp/config.txt
+    register: file_status
+
+  - name: run when file exist
+    debug:
+      msg: "File exists"
+    when: file_status.stat.exists == true
+
+  - name: run when file does not exist
+    debug:
+      msg: "File does not exists"
+    when: file_status.stat.exists == false
